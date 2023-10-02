@@ -6,67 +6,77 @@
 /*   By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 16:06:54 by gcampos-          #+#    #+#             */
-/*   Updated: 2023/10/02 10:51:42 by gcampos-         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:36:01 by gcampos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//count words in string
-int	count_wrd(char const *s, char c)
+static int	ft_count_words(const char *s, char c)
 {
 	int	i;
-	int	count;
+	int	words;
 
 	i = 0;
-	count = 0;
-	while (s[i] != '\0')
+	words = 0;
+	while (s[i])
 	{
-		if (s[i] != c && (i == 0 || s[i - 1] == c))
+		if (s[i] != c)
 		{
-			count++;
+			words++;
+			while (s[i] && s[i] != c)
+				i++;
 		}
-		i++;
+		else
+			i++;
 	}
-	return (count);
+	return (words);
 }
 
-//count letters in words
-size_t	cliw(const char *str, char c)
+static char	*word_splitter(const char *s, char c)
 {
-	size_t	i;
+	char	*word;
+	int		i;
 
 	i = 0;
-	while (str[i] && str[i] != c)
+	while (s[i] && s[i] != c)
 		i++;
-	return (i);
+	word = (char *) malloc(sizeof(char) * (i + 1));
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (s[i] && s[i] != c)
+	{
+		word[i] = s[i];
+		i++;
+	}
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	str_size;
-	size_t	wrd_size;
-	char	**str_final;
+	int		i;
+	int		j;
+	char	**words;
 
 	i = 0;
-	if (!s)
+	j = 0;
+	words = (char **) malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	if (!words || !s)
 		return (NULL);
-	str_size = count_wrd(s, c);
-	str_final = malloc((str_size + 1) * sizeof(char *));
-	if (!str_final)
-		return (NULL);
-	while (i < str_size)
+	while (s[i])
 	{
-		while (*s && *s == c)
-			s++;
-		wrd_size = cliw(s, c);
-		str_final[i] = ft_substr(s, 0, wrd_size);
-		if (!str_final[i])
-			free(str_final[i]);
-		s = (s + wrd_size) + 1;
-		i++;
+		if (s[i] != c)
+		{
+			words[j] = word_splitter(&s[i], c);
+			while (s[i] && s[i] != c)
+				i++;
+			j++;
+		}
+		else
+			i++;
 	}
-	str_final[str_size] = NULL;
-	return (str_final);
+	words[j] = 0;
+	return (words);
 }
