@@ -6,7 +6,7 @@
 #    By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:32:48 by gcampos-          #+#    #+#              #
-#    Updated: 2023/09/28 16:45:53 by gcampos-         ###   ########.fr        #
+#    Updated: 2023/10/05 18:30:04 by gcampos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ $(PROG): ${OBJS}
 clean:
 		${MAKE} ${LIBFT_PATH} clean
 		${RM} ${OBJS}
-		${RM} ${PROG}
 
 fclean: clean
 		${MAKE} ${LIBFT_PATH} fclean
