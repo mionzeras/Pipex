@@ -6,7 +6,7 @@
 /*   By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:36 by gcampos-          #+#    #+#             */
-/*   Updated: 2023/10/02 10:58:38 by gcampos-         ###   ########.fr       */
+/*   Updated: 2023/10/05 22:21:53 by gcampos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,21 @@ void	exec_cmd(char *av, char **envp)
 	char	*path;
 	char	**cmd;
 
-	cmd = ft_split(av, ' ');
-	path = find_path(cmd[0], envp);
-	if (!path)
+	if(av[0])
 	{
-		free_split(cmd);
-		free (path);
-		exit(127);
-	}
-	if (execve(path, cmd, envp) == -1)
-	{
-		free_split(cmd);
-		free (path);
-		ft_error("Error: cant execute command.");
+		cmd = ft_split(av, ' ');
+		path = find_path(cmd[0], envp);
+		if (!path)
+		{
+			free_split(cmd);
+			free (path);
+			exit(127);
+		}
+		if (execve(path, cmd, envp) == -1)
+		{
+			free_split(cmd);
+			free (path);
+			ft_error("Error: cant execute command.");
+		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:32:48 by gcampos-          #+#    #+#              #
-#    Updated: 2023/10/05 18:30:04 by gcampos-         ###   ########.fr        #
+#    Updated: 2023/10/05 22:22:55 by gcampos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ MAKE = make -C
 LIBFT_PATH = libft
 LIBFT = -L ${LIBFT_PATH} -lft
 
-.c.o:	%.o : %.c
+.c.o:
 		${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 all:	${PROG}

@@ -6,7 +6,7 @@
 /*   By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:36:25 by gcampos-          #+#    #+#             */
-/*   Updated: 2023/10/02 10:56:57 by gcampos-         ###   ########.fr       */
+/*   Updated: 2023/10/05 22:18:09 by gcampos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ int	main(int ac, char **av, char **envp)
 			ft_error("Fork");
 		if (child_pid == 0)
 			child_process(fd, av, envp);
-		waitpid(child_pid, NULL, 0);
-		parent_process(fd, av, envp);
+		else
+		{
+			waitpid(child_pid, NULL, 0);
+			parent_process(fd, av, envp);
+		}
 	}
 	else
 	{
