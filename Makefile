@@ -6,7 +6,7 @@
 #    By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:32:48 by gcampos-          #+#    #+#              #
-#    Updated: 2023/10/05 22:22:55 by gcampos-         ###   ########.fr        #
+#    Updated: 2023/10/09 12:41:07 by gcampos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,18 +30,25 @@ LIBFT = -L ${LIBFT_PATH} -lft
 all:	${PROG}
 
 $(PROG): ${OBJS}
-		${MAKE} ${LIBFT_PATH} all
+		@echo "Compiling libft..."
+		@${MAKE} ${LIBFT_PATH} all
+		@echo "libft compiled!"
+		@echo "Compiling ${PROG}..."
 		${CC} ${OBJS} ${LIBFT} -o ${PROG}
-
+		@echo "pipex compiled!"
 
 
 clean:
 		${MAKE} ${LIBFT_PATH} clean
-		${RM} ${OBJS}
+		@echo "libft cleaned!"
+		@${RM} ${OBJS}
+		@echo "pipex cleaned!"
 
 fclean: clean
 		${MAKE} ${LIBFT_PATH} fclean
-		${RM} ${PROG}
+		@echo "libft fcleaned!"
+		@${RM} ${PROG}
+		@echo "pipex fcleaned!"
 
 re: fclean all
 

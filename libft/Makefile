@@ -15,24 +15,26 @@ BONUS_OBJ = ${BONUS:.c=.o}
 HEADER = libft.h
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 %.o:%.c
-		${CC} ${CFLAGS} -c -o $@ $^
+		@${CC} ${CFLAGS} -c -o $@ $^
 
 $(NAME): ${OBJS} ${HEADER}
-		ar rcs ${NAME} ${OBJS} ${HEADER}
+		@ar rcs ${NAME} ${OBJS} ${HEADER}
 
 all:    ${NAME}
 
 bonus:	${OBJS} ${BONUS_OBJ}
-		ar rcs ${NAME} ${OBJS} ${BONUS_OBJ}
+		@ar rcs ${NAME} ${OBJS} ${BONUS_OBJ}
 
 clean:
-		${RM} ${OBJS} ${BONUS_OBJ}
+		@${RM} ${OBJS} ${BONUS_OBJ}
+		@echo "Cleaned"
 
 fclean: clean
-		${RM} ${NAME}
+		@${RM} ${NAME}
+		@echo "Fcleaned"
 
 tclean: clean
 		${RM}
