@@ -6,7 +6,7 @@
 /*   By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:36 by gcampos-          #+#    #+#             */
-/*   Updated: 2023/10/05 22:21:53 by gcampos-         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:56:08 by gcampos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,11 @@ void	ft_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void	check_envp(char **envp)
+void	msg(char *msg, int check, int output)
 {
-	int	i;
-	int	ok;
-
-	i = -1;
-	ok = 0;
-	while (envp[++i])
-	{
-		if (ft_strnstr(envp[i], "PATH=", 5) && envp[i][6])
-			ok = 1;
-	}
-	if (!ok)
-	{
-		ft_putstr_fd("Error: PATH empty.", 2);
+	write(output, msg, ft_strlen(msg));
+	if (check == 0)
 		exit(1);
-	}
 }
 
 void	free_split(char **str)
@@ -72,18 +60,18 @@ char	*find_path(char *cmd, char **envp)
 		free (cmd_path);
 	}
 	free_split(envp_path);
-	ft_putstr_fd("command not found\n", 2);
+	msg("command not found\n", 1, 2);
 	return (NULL);
 }
 
-void	exec_cmd(char *av, char **envp)
+void	exec_cmd(char *argv, char **envp)
 {
 	char	*path;
 	char	**cmd;
 
-	if(av[0])
+	if (argv[0])
 	{
-		cmd = ft_split(av, ' ');
+		cmd = ft_split(argv, ' ');
 		path = find_path(cmd[0], envp);
 		if (!path)
 		{
