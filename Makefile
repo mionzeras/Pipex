@@ -6,7 +6,7 @@
 #    By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:32:48 by gcampos-          #+#    #+#              #
-#    Updated: 2023/10/09 12:41:07 by gcampos-         ###   ########.fr        #
+#    Updated: 2023/11/02 15:03:45 by gcampos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RM = rm -f
 INCLUDE = -I .
 
 #FILES
-SRCS = pipex.c utils.c
+SRCS = pipex.c utils.c process.c
 OBJS = ${SRCS:.c=.o}
 MAKE = make -C
 LIBFT_PATH = libft
