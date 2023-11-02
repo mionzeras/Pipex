@@ -6,7 +6,7 @@
 /*   By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:36:25 by gcampos-          #+#    #+#             */
-/*   Updated: 2023/10/10 16:32:23 by gcampos-         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:01:33 by gcampos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **envp)
 			child_process(fd, argv, envp);
 		else
 		{
-			waitpid(child_pid, NULL, 0);
+			waitpid(child_pid, NULL, WNOHANG);
 			parent_process(fd, argv, envp);
 		}
 	}
