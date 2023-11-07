@@ -6,7 +6,7 @@
 /*   By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:53:36 by gcampos-          #+#    #+#             */
-/*   Updated: 2023/11/07 14:00:32 by gcampos-         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:05:32 by gcampos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	execute_process(char **argv, char **envp)
 	if (child_pid == -1)
 		ft_error("Fork");
 	if (child_pid == 0)
-			child_process(fd, argv, envp);
+		child_process(fd, argv, envp);
 	else
 	{
 		waitpid(child_pid, NULL, WNOHANG);

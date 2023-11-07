@@ -6,7 +6,7 @@
 /*   By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:36 by gcampos-          #+#    #+#             */
-/*   Updated: 2023/10/10 15:56:08 by gcampos-         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:57:32 by gcampos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,18 @@ void	free_split(char **str)
 	free(str);
 }
 
-char	*find_path(char *cmd, char **envp)
+char	*find_path(char *cmd, char **envp, int count)
 {
-	int		i;
 	char	*part_path;
 	char	*cmd_path;
 	char	**envp_path;
 
-	i = 0;
-	while (!ft_strnstr(envp[i], "PATH=", 5))
-		i++;
-	envp_path = ft_split(envp[i] + 5, ':');
-	i = -1;
-	while (envp_path[++i])
+	while (!ft_strnstr(*envp, "PATH=", 5))
+		envp++;
+	envp_path = ft_split(*envp + 5, ':');
+	while (envp_path[++count] && cmd[0] != '/')
 	{
-		part_path = ft_strjoin(envp_path[i], "/");
+		part_path = ft_strjoin(envp_path[count], "/");
 		cmd_path = ft_strjoin(part_path, cmd);
 		free (part_path);
 		if (access(cmd_path, F_OK) == 0)
@@ -60,6 +57,8 @@ char	*find_path(char *cmd, char **envp)
 		free (cmd_path);
 	}
 	free_split(envp_path);
+	if (cmd[0] == '/' && access(cmd, F_OK) == 0)
+		return (ft_strdup(cmd));
 	msg("command not found\n", 1, 2);
 	return (NULL);
 }
@@ -72,7 +71,7 @@ void	exec_cmd(char *argv, char **envp)
 	if (argv[0])
 	{
 		cmd = ft_split(argv, ' ');
-		path = find_path(cmd[0], envp);
+		path = find_path(cmd[0], envp, -1);
 		if (!path)
 		{
 			free_split(cmd);
