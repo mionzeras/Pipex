@@ -6,7 +6,7 @@
 /*   By: gcampos- <gcampos-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:45:24 by gcampos-          #+#    #+#             */
-/*   Updated: 2023/11/02 15:15:33 by gcampos-         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:00:49 by gcampos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	parent_process(int *fd, char **av, char **envp);
 void	check_envp(char **envp);
 void	free_split(char **str);
 void	exec_cmd(char *av, char **envp);
-void	empty_cmd1(int *fd, char **argv, char **envp);
-void	empty_cmd2(int *fd, char **argv, char **envp);
 void	execute_process(char **argv, char **envp);
 char	*find_path(char *cmd, char **envp);
 
